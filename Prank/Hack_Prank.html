@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Acceso remoto</title>
+  <style>
+    body {
+      background-color: black;
+      color: #00ff00;
+      font-family: monospace;
+      padding: 20px;
+      font-size: 16px;
+    }
+    #terminal {
+      white-space: pre-wrap;
+    }
+    .blink {
+      animation: blink 1s infinite;
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div id="terminal"></div>
+  <script>
+    const lines = [
+      'Conectando con el sistema...',
+      'IP detectada: 192.168.1.104',
+      'Acceso root obtenido ✅',
+      'Listando archivos del sistema...',
+      '/home/user/passwords.txt',
+      '/home/user/fotos_privadas/',
+      'Extrayendo datos a servidor remoto...',
+      '--- 25% ████...............',
+      '--- 63% █████████........',
+      '--- 99% ███████████████.',
+      '✅ Datos exfiltrados con éxito',
+      'Activando cámara web... 📷',
+      'Transmitiendo en vivo a canal 0x3F...',
+      '',
+      '💀 SISTEMA COMPROMETIDO 💀',
+      'Todos tus archivos han sido cifrados.',
+      'Para recuperar el acceso, contacta a: admin@redoscura.to'
+    ];
+
+    let index = 0;
+    const terminal = document.getElementById('terminal');
+
+    function typeLine() {
+      if (index < lines.length) {
+        terminal.innerHTML += lines[index] + '<br />';
+        index++;
+        setTimeout(typeLine, 600);
+      } else {
+        const cursor = document.createElement('span');
+        cursor.className = 'blink';
+        cursor.textContent = '_';
+        terminal.appendChild(cursor);
+      }
+    }
+
+    window.onload = typeLine;
+  </script>
+</body>
+</html>
